@@ -1,8 +1,8 @@
 import numpy as np
 
 def calcular_b_y_error(B, B_delta, m, m_delta):
-    # Calcular el valor de b a partir de la fórmula B = b / (2m)
-    b = 2 * m * B
+    # Calcular el valor de b a partir de la fórmula b = 2m / B
+    b = (2 * m) / B
     
     # Calcular el error en b usando la propagación de errores
     b_delta = b * np.sqrt((B_delta / B)**2 + (m_delta / m)**2)
