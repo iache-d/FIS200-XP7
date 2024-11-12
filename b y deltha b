@@ -3,26 +3,20 @@ import numpy as np
 
 def calcular_b_y_error(B, B_delta, m, m_delta):
     # Convertir m a kilogramos
-    m_kg = m / 1000  # Convertir gramos a kilogramos
-    m_delta_kg = m_delta / 1000  # Convertir error de masa a kilogramos
+    m_kg = m / 1000
+    m_delta_kg = m_delta / 1000
 
-    # Calcular el valor de b a partir de la fórmula 1/B = b / (2m)
     b = (1 / B) * (2 * m_kg)
-
-    # Calcular el error en b usando la propagación de errores
     b_delta = b * np.sqrt((B_delta / B) ** 2 + (m_delta_kg / m_kg) ** 2)
 
     return b, b_delta, m_kg, m_delta_kg
 
 
-# Ejemplo de uso:
 B = 165.889
-B_delta = 0.001  # Error fijo de B
+B_delta = 0.001
 m = 40.10
-m_delta = 0.01  # Error fijo de m (en gramos)
+m_delta = 0.01
 
-# Llamar a la función para obtener b y b_delta
 b, b_delta, m_kg, m_delta_kg = calcular_b_y_error(B, B_delta, m, m_delta)
 
-# Mostrar los resultados
 print(f"El valor calculado de b es: {b:.9f} ± {b_delta:.9f}")
