@@ -1,0 +1,46 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Leer el archivo de datos
+filename = 'XP7FIS200 L3.txt'
+
+# Leer todo el archivo como texto y reemplazar las comas por puntos
+with open(filename, 'r') as file:
+    data = file.readlines()
+
+# Procesar los datos: dividir por líneas y luego por columnas
+tiempo = []
+posicion = []
+
+for line in data:
+    # Dividir la línea por espacio/tabulación y reemplazar la coma por punto
+    values = line.replace(',', '.').split()
+
+    # Verificar si la línea contiene dos elementos numéricos
+    if len(values) == 2:
+        tiempo.append(float(values[0]))
+        posicion.append(float(values[1]))
+
+# Convertir las listas a arrays de numpy
+tiempo = np.array(tiempo)
+posicion = np.array(posicion)
+
+# Crear la gráfica
+plt.figure(figsize=(10, 6))
+plt.plot(tiempo, posicion, label='Posición vs Tiempo')
+
+# Etiquetas y título
+plt.xlabel('(Tiempo ± 0.1) s')
+plt.ylabel('(Posición ± 0.0001) m')
+
+# Mostrar leyenda
+plt.legend()
+
+# Mostrar la gráfica
+plt.grid(True)
+
+# Guardar la gráfica con 300 DPI
+plt.savefig('XP7FIS200 L1.png', dpi=300)
+
+# Mostrar la gráfica
+plt.show()
