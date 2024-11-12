@@ -1,0 +1,30 @@
+import numpy as np
+
+# Definir las variables de entrada
+omega_0 = 10  # Frecuencia angular natural en rad/s
+delta_omega_0 = 2  # Incertidumbre en omega_0 en rad/s
+
+b = 0.0004835  # Amortiguamiento en unidades apropiadas
+delta_b = 0.0000001  # Incertidumbre en b en unidades de b
+
+m = 0.0401  # Masa en kg
+delta_m = 0.00001  # Incertidumbre en m en kg
+
+# Calcular omega
+omega = np.sqrt(omega_0**2 - (b / (2 * m)) ** 2)
+
+# Derivadas parciales
+d_omega_d_omega_0 = omega_0 / np.sqrt(omega_0**2 - (b / (2 * m)) ** 2)
+d_omega_d_b = -b / (2 * m**2 * np.sqrt(omega_0**2 - (b / (2 * m)) ** 2))
+d_omega_d_m = b / (2 * m**3 * np.sqrt(omega_0**2 - (b / (2 * m)) ** 2))
+
+# Propagación de errores
+delta_omega = np.sqrt(
+    (d_omega_d_omega_0 * delta_omega_0) ** 2
+    + (d_omega_d_b * delta_b) ** 2
+    + (d_omega_d_m * delta_m) ** 2
+)
+
+# Mostrar resultados
+print(f"Valor de omega: {omega:.4f} rad/s")
+print(f"Incertidumbre en omega: {delta_omega:.4f} rad/s")
