@@ -1,0 +1,17 @@
+import numpy as np
+
+# Supón que ya tienes los valores de omega_0 y m con sus respectivos errores
+omega_0 = 6.98  # Ejemplo de valor de omega_0 en radianes por segundo
+delta_omega_0 = 0.001  # Ejemplo de incertidumbre en omega_0 (rad/s)
+m = 0.07958  # Ejemplo de valor de la masa en kg
+delta_m = 0.00001  # Ejemplo de incertidumbre en la masa (kg)
+
+# Calcular la constante elástica K usando omega_0
+K = m * omega_0**2
+
+# Propagación de errores
+delta_K = K * np.sqrt((delta_m / m) ** 2 + (2 * delta_omega_0 / omega_0) ** 2)
+
+# Mostrar el valor de K y su incertidumbre
+print(f"Valor de K: {K:.4f} N/m")
+print(f"Incertidumbre en K: {delta_K:.4f} N/m")
