@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.signal import find_peaks
 
-# Datos de tiempo y posición proporcionados
 tiempo = np.array(
     [
         0,
@@ -228,21 +227,15 @@ T_promedio = np.mean(periodos)
 T_desviacion = np.std(periodos)
 
 # Calcular la incertidumbre en omega_0
-delta_T = (
-    T_desviacion  # La incertidumbre en T es la desviación estándar de los períodos
-)
+delta_T = T_desviacion
 delta_omega_0 = (2 * np.pi / T_promedio**2) * delta_T
-
-# Calcular la frecuencia angular omega_0
 omega_0 = 2 * np.pi / T_promedio
 
-# Mostrar los resultados
 print(f"Período promedio: {T_promedio:.4f} s")
 print(f"Incertidumbre en el período: {T_desviacion:.4f} s")
 print(f"Frecuencia angular natural omega_0: {omega_0:.4f} rad/s")
 print(f"Incertidumbre en omega_0: {delta_omega_0:.4f} rad/s")
 
-# Graficar los datos y los picos
 plt.figure(figsize=(10, 6))
 plt.plot(tiempo, posicion, label="Posición vs Tiempo")
 plt.plot(tiempo[picos], posicion[picos], "ro", label="Picos")
